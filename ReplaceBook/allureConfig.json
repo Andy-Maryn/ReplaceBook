@@ -1,0 +1,17 @@
+{
+  "allure": {
+    "directory": "allure-results",
+    "brokenTestData": [ "System.Exception" ]
+  },
+  "steps": {
+    "namespace": "ReplaceBook.Steps",
+    "suite": "Bookstore API",
+    "feature": "Replace Book",
+    "methods": [
+      {
+        "step": "Create user and generate token",
+        "given": "a user exists in the Bookstore"
+      }
+    ]
+  }
+}
