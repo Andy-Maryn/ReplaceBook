@@ -1,13 +1,20 @@
-# ReplaceBook
-Test case 1 - Search and navigate to the Steam About page
+Test case 2 - Replace a book
+
+Swagger -https://bookstore.toolsqa.com/swagger
+
+Host -https://bookstore.toolsqa.com
 
 Preconditions:
-- The browser should open in incognito mode.
-- Go to https://store.steampowered.com
+- A user with a randomly generated username and password is created and authorized.
 
 | Steps | Expected Results |
 |-------|------------------|
-| 1 Type 'FIFA' inthe search field | The first search result is 'EA SPORTS FCTM 25', The second search result is 'FIFA 22'|
-| 2 Click the first search result using a JavaScript script | The Game page is displayed, The game name equals the game name from the 1st search result|
-|3 Click Download button||
-|4 Click No, I need Steam button| About Steam page is displayed, Install Steam button is clickable, Playing Now gamers are less than Online gamers|
+|1 Get all books sendingGET /BookStore/v1/Books. |Status code 200. The book list contains books.|
+|2 Add the first book from the book list from the previous response to the user's book list sendingPOST /BookStore/v1/Books.| Status code 201.|
+|3 Get the user by its id sendingGET /Account/v1/User/{userId}.|Status code 200. The user's book list contains only one book. The book in the user's book list matches the book added in the previous step.|
+|4 Replace the book from the user's book list with the second book from the book list from the previous response sendingPOST /BookStore/v1/Books.| Status code 200.|
+|5 Get the user by its id sendingGET /Account/v1/User/{userId}. |Status code 200. The user's book list contains only one book. The book in the user's book list was replaced and matches the book from the previous step.|
+
+Postconditions:
+- Delete the created user.
+
